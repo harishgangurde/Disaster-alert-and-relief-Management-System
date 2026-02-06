@@ -1,91 +1,83 @@
-🚨 Disaster Alert & Relief Management System — SafeServe
+# 🚨 SafeServe - Disaster Alert & Relief Management System
 
-A JavaFX-based disaster response system designed to streamline communication, alert generation, and relief coordination during natural or man-made disasters.
-This system integrates role-based access, real-time relief workflow management, and AI-assisted disaster support to ensure fast and coordinated emergency response.
+A JavaFX-based disaster response system designed to streamline communication, alert generation, and relief coordination during natural or man-made disasters. This system integrates role-based access, real-time workflow management, and AI-assisted support to ensure fast and coordinated emergency response.
 
-📌 Table of Contents
+---
 
-About the Project
+## 📖 About the Project
 
-Key Features
+**SafeServe** is a desktop application built using **Java + JavaFX**, with **Firebase** as the backend. It enhances coordination between citizens, volunteers, NGOs, and government authorities during disasters.
 
-System Roles
+### The project includes:
+- 🔔 Disaster alert broadcasting
+- 🤝 Relief task assignment
+- 🤖 AI chatbot for help & safety guidance
+- 👥 Multi-role login system
 
-Architecture
+---
 
-Tech Stack
+## ⭐ Key Features
 
-Folder Structure
+### 🔔 Disaster Alert Generation
+- Create and broadcast alerts
+- Classify alerts (Flood, Fire, Earthquake, etc.)
+- Notify authorities automatically
 
-How to Run
+### 🤝 Relief Coordination
+- Track help requests
+- Assign tasks to volunteers
+- NGO–Government coordination
+- Live status updates
 
-Future Enhancements
+### 👤 User Management
+- 4 role-based logins
+- Secure Firebase authentication
+- Permission-controlled workflows
 
-Author
+### 🤖 AI-based Disaster Assistant
+- Answers FAQs
+- Provides safety guidelines
+- Helps users find emergency services
+- Reduces manual workload
 
-📖 About the Project
+---
 
-The SafeServe – Disaster Alert and Relief Management System is a desktop application built using Java and JavaFX, with Firebase as the backend.
-It improves communication between citizens, NGOs, volunteers, and government authorities to ensure a smooth disaster response workflow.
+## 🧩 System Roles
 
-This project includes features like disaster alert broadcasting, relief task assignments, AI-based chatbot support, and a multi-role login system.
+| Role       | Responsibilities                                      |
+|------------|-------------------------------------------------------|
+| **Citizen**    | Raise requests, view alerts, chatbot help             |
+| **NGO**        | Provide resources, join relief operations             |
+| **Volunteer**  | Accept tasks, update real-time field status           |
+| **Government** | Issue alerts, oversee complete system                 |
 
-⭐ Key Features
-🔔 1. Disaster Alert Generation
+---
 
-Create and broadcast disaster alerts
+## 🏗️ System Architecture (3-Tier)
 
-Classify alerts (Flood, Fire, Earthquake, etc.)
-
-Notify relevant authorities based on severity
-
-🤝 2. Relief Coordination
-
-Track victim requests
-
-Assign tasks to volunteers
-
-NGO–Government coordination panel
-
-Real-time status updates
-
-👤 3. User Management
-
-Role-based access control
-
-4 login types
-
-Secure Firebase-backed authentication
-
-🤖 4. AI-driven Disaster Assistant
-
-Provides safety guidelines
-
-Answers FAQs
-
-Helps citizens access emergency services
-
-Reduces manual workload
-
-🧩 System Roles
-Role	Description
-Citizen	Raise help requests, view alerts, interact with chatbot
-NGO	Provide resources and coordinate relief efforts
-Volunteer	Accept tasks and update real-time status
-Government	Issue alerts and manage all operations
-🏗️ System Architecture (3-Tier)
+```
 Presentation Layer  →  JavaFX UI (Screens, Controllers)
-Business Layer       →  Services, Validation, Workflow Logic
-Data Layer           →  Firebase Realtime Database + Authentication
+Business Layer      →  Services, Validation, Workflow Logic
+Data Layer          →  Firebase Realtime DB + Authentication
+```
 
-🛠️ Tech Stack
-Category	Tools / Technologies
-Language	Java
-UI Framework	JavaFX
-Backend	Firebase
-Architecture	MVC + 3-Tier
-Tools	VS Code / IntelliJ, Git, GitHub
-📂 Folder Structure
+---
+
+## 🛠️ Tech Stack
+
+| Category      | Tools / Technologies                    |
+|---------------|-----------------------------------------|
+| **Language**  | Java                                    |
+| **UI Framework** | JavaFX                               |
+| **Backend**   | Firebase                                |
+| **Architecture** | MVC + 3-Tier                         |
+| **Tools**     | VS Code / IntelliJ, Git, GitHub         |
+
+---
+
+## 📂 Folder Structure
+
+```
 src/
  └── main/
       └── java/
@@ -96,41 +88,66 @@ src/
                  ├── view/              # JavaFX Screens
                  ├── configuration/     # Firebase Initialization
                  └── Main.java          # Entry Point
+```
 
-▶️ How to Run Locally
-Step 1: Clone the Repository
+---
+
+## ▶️ How to Run Locally
+
+### Step 1 — Clone the Repository
+
+```bash
 git clone https://github.com/harishgangurde/Disaster-alert-and-relief-Management-System.git
 cd Disaster-alert-and-relief-Management-System
+```
 
-Step 2: Open in VS Code / IntelliJ
-Step 3: Add Firebase Configuration
+### Step 2 — Open in VS Code or IntelliJ
+Open the project in your preferred IDE.
 
-Place your Firebase config file inside the configuration folder.
+### Step 3 — Add Firebase Configuration
+Place your Firebase config file inside the `configuration` folder.
 
-Step 4: Run the Application
+### Step 4 — Run the Application
+Run:
 
-Run the file:
-
+```bash
 Main.java
+```
 
-🚀 Future Enhancements
+---
 
-Real-time map integration
+## 🚀 Future Enhancements
 
-SMS-based alert system
+- [ ] Real-time disaster map integration
+- [ ] SMS alert system
+- [ ] Multi-language chatbot
+- [ ] Volunteer path guidance
+- [ ] Mobile app version using Flutter
 
-Multi-language chatbot
+---
 
-Volunteer path optimization
+## 👤 Author
 
-Flutter mobile app version
+**Harish Gangurde**
 
-👤 Author
+- 📧 Email: harishgangurde.nbnstic.entc@gmail.com
+- 🐙 GitHub: [@harishgangurde](https://github.com/harishgangurde)
+- 💼 LinkedIn: [harish-gangurde](https://linkedin.com/in/harish-gangurde)
 
-Harish Gangurde
-Software Developer (Java | Flutter | Firebase)
-Email: harishgangurde.nbnstic.entc@gmail.com
+---
 
-GitHub: https://github.com/harishgangurde
+## 📄 License
 
-LinkedIn: https://linkedin.com/in/harish-gangurde
+This project is open source and available for educational purposes.
+
+---
+
+## 🙏 Acknowledgments
+
+Special thanks to all contributors and the open-source community for their support in building disaster management solutions.
+
+---
+
+<div align="center">
+  <strong>Built with ❤️ for safer communities</strong>
+</div>
