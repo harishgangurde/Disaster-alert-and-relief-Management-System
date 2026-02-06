@@ -1,0 +1,5 @@
+# Firebase / Google Cloud keys
+*.json
+service-account-key.pem
+google-services.json
+.env

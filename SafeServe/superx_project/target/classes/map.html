@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Disaster & Shelter Map - Pune</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Styles for the custom control at the bottom right */
+        .info-control {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            font-family: sans-serif;
+            font-size: 14px;
+            color: #333;
+            max-height: 40%; /* Limit height to prevent overflow */
+            overflow-y: auto; /* Add scroll if content overflows */
+        }
+        .info-control h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 16px;
+        }
+        .info-control ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .info-control ul li {
+            margin-bottom: 3px;
+        }
+        .info-control .disaster-item {
+            color: #dc3545; /* Red color */
+        }
+        .info-control .shelter-item {
+            color: #28a745; /* Green color */
+        }
+
+        /* Style for permanent tooltips */
+        .leaflet-tooltip.permanent-label {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            color: black; /* Or a color that stands out */
+            font-weight: bold;
+            font-size: 14px;
+            padding: 0;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.7); /* Optional: add subtle text shadow for readability */
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    // Initialize the map and set its view to a central point in Pune
+    // Adjusted view to better encompass all locations
+    var map = L.map('map').setView([18.5204, 73.8567], 12); // Centered on Pune, Zoom 12
+
+    // Add a tile layer to add to our map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Data for areas with corrected coordinates
+    var disasterAreas = [
+        { name: "NBN Sinhgad College (Katraj)", lat: 18.4593, lon: 73.8345 },
+        { name: "Katraj Bus Stop", lat: 18.4445, lon:  73.8586 },
+         { name: "Chandani Chowk", lat: 18.5050, lon: 73.7760 },
+        { name: "Hinjawadi Phase 1", lat: 18.5898, lon: 73.7385 },
+        { name: "Deccan Gymkhana", lat: 18.5186, lon: 73.8430 },
+        
+    ];
+
+    var shelterAreas = [
+        { name: "Core2Web (Narhe)", lat: 18.453677, lon: 73.827616 },
+        { name: "BAPS Shri Swaminarayan Temple", lat: 18.441960, lon: 73.836580 },
+        { name: "Swargate", lat: 18.5005, lon: 73.8655 },
+       
+        { name: "Warje", lat: 18.4900, lon: 73.8000 },
+        { name: "Pune Railway Station", lat: 18.5278, lon: 73.8732 },
+        { name: "Shivaji Nagar Court", lat: 18.5300, lon: 73.8530 },
+        { name: "Aga Khan Palace (Nagar Road)", lat: 18.5525, lon: 73.9030 }
+    ];
+
+    // --- Add Disaster Areas (Red Circles with Labels) ---
+    var disasterColor = 'darkred';
+    var disasterFillColor = '#dc3545'; // Vibrant red
+    var disasterFillOpacity = 0.7;
+    var disasterCircleRadius = 200; // Radius in meters
+
+    disasterAreas.forEach(function(area) {
+        L.circle([area.lat, area.lon], {
+            color: disasterColor,
+            fillColor: disasterFillColor,
+            fillOpacity: disasterFillOpacity,
+            radius: disasterCircleRadius
+        }).addTo(map)
+          .bindTooltip(area.name, { // Add permanent tooltip/label
+              permanent: true,
+              direction: 'center',
+              className: 'permanent-label' // Custom class for styling
+          })
+          .bindPopup("<b>Disaster Zone:</b><br>" + area.name + " vicinity.");
+    });
+
+    // --- Add Shelter Areas (Green Circles with Labels) ---
+    var shelterColor = 'darkgreen';
+    var shelterFillColor = '#28a745'; // Vibrant green
+    var shelterFillOpacity = 0.7;
+    var shelterCircleRadius = 250; // Slightly larger radius for shelters
+
+    shelterAreas.forEach(function(area) {
+        L.circle([area.lat, area.lon], {
+            color: shelterColor,
+            fillColor: shelterFillColor,
+            fillOpacity: shelterFillOpacity,
+            radius: shelterCircleRadius
+        }).addTo(map)
+          .bindTooltip(area.name, { // Add permanent tooltip/label
+              permanent: true,
+              direction: 'center',
+              className: 'permanent-label' // Custom class for styling
+          })
+          .bindPopup("<b>Shelter Area:</b><br>" + area.name + " (potential shelter).");
+    });
+
+    // --- Custom Control for Lists (Bottom Right) ---
+    var infoControl = L.control({position: 'bottomright'});
+
+    infoControl.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info-control'); // Create a div with a custom class
+        var disasterListHtml = '<h4>Affected Areas:</h4><ul>';
+        disasterAreas.forEach(function(area) {
+            disasterListHtml += '<li class="disaster-item">' + area.name + '</li>';
+        });
+        disasterListHtml += '</ul>';
+
+        var shelterListHtml = '<h4>Shelter Areas:</h4><ul>';
+        shelterAreas.forEach(function(area) {
+            shelterListHtml += '<li class="shelter-item">' + area.name + '</li>';
+        });
+        shelterListHtml += '</ul>';
+
+        div.innerHTML = disasterListHtml + shelterListHtml;
+        return div;
+    };
+
+    infoControl.addTo(map);
+
+</script>
+
+</body>
+</html>
